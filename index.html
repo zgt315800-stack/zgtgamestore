@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>五子棋</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="game-shell" aria-label="五子棋游戏">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Gomoku</p>
+            <h1>五子棋</h1>
+          </div>
+          <div class="scoreboard" aria-label="比分">
+            <div class="score score-black">
+              <span>黑棋</span>
+              <strong id="blackScore">0</strong>
+            </div>
+            <div class="score score-white">
+              <span>白棋</span>
+              <strong id="whiteScore">0</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="status-panel" aria-live="polite">
+          <div class="turn-chip" id="turnChip">
+            <span class="stone-preview black"></span>
+            <span id="statusText">黑棋先手</span>
+          </div>
+          <div class="mode-switch" aria-label="游戏模式">
+            <button class="active" id="localModeBtn" type="button" aria-pressed="true">本地对战</button>
+            <button id="aiModeBtn" type="button" aria-pressed="false">AI 对战</button>
+          </div>
+          <div class="move-count">
+            <span>手数</span>
+            <strong id="moveCount">0</strong>
+          </div>
+        </section>
+
+        <section class="ai-panel" id="aiPanel" aria-label="AI 对战设置">
+          <div class="setting-group">
+            <span class="setting-label">你的棋色</span>
+            <div class="segmented" aria-label="选择棋色">
+              <button class="active" id="playerBlackBtn" type="button" aria-pressed="true">执黑</button>
+              <button id="playerWhiteBtn" type="button" aria-pressed="false">执白</button>
+            </div>
+          </div>
+          <div class="setting-group">
+            <span class="setting-label">AI 类型</span>
+            <div class="segmented" aria-label="选择 AI 难度">
+              <button class="active" id="localAiBtn" type="button" aria-pressed="true">本地 AI</button>
+              <button id="llmAiBtn" type="button" aria-pressed="false">大模型 AI</button>
+            </div>
+          </div>
+          <div class="setting-group local-levels" id="localLevelSettings">
+            <span class="setting-label">本地 AI 强度</span>
+            <div class="segmented four-up" aria-label="选择本地 AI 强度">
+              <button id="noviceAiBtn" type="button" aria-pressed="false">新手</button>
+              <button class="active" id="normalAiBtn" type="button" aria-pressed="true">普通</button>
+              <button id="hardAiBtn" type="button" aria-pressed="false">困难</button>
+              <button id="expertAiBtn" type="button" aria-pressed="false">专家</button>
+            </div>
+          </div>
+          <div class="llm-settings" id="llmSettings">
+            <label>
+              <span>服务地址</span>
+              <input id="llmEndpoint" type="url" placeholder="https://your-domain.com/api/gomoku-move" />
+            </label>
+            <label>
+              <span>访问密钥</span>
+              <input id="llmApiKey" type="password" placeholder="可选，建议只用于你自己的后端" />
+            </label>
+          </div>
+        </section>
+
+        <div class="board-wrap">
+          <canvas id="board" width="720" height="720" aria-label="五子棋棋盘"></canvas>
+        </div>
+
+        <footer class="controls">
+          <button id="undoBtn" type="button">悔棋</button>
+          <button id="restartBtn" type="button">重新开始</button>
+        </footer>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
